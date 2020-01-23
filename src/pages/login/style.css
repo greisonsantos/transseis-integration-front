@@ -1,0 +1,29 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputs{
+  color: aliceblue;
+}
+.title{
+  font-size: 30px;
+  color: aliceblue;
+}
+.selectSector{
+  display: flex;
+  flex-direction: row;
+}
+#iconSelect{
+  margin-top: 8px;
+  width: 30px;
+  height: 30px;
+  margin-right: 12px;
+}
+#imageLogo{
+  position: absolute;
+top: 10px;
+}

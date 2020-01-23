@@ -1,58 +1,54 @@
-import React, { Component } from "react";
+import React from "react";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from 'mdbreact';
+import './style.css';
 import { Link } from "react-router-dom";
-import { Form, Button, FormGroup } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Image from "../../assets/login.png";
 
-import "./styles.css";
+const Login = () => {
+  return (
 
+    <div className='container'>
+      {/* <img src={logo} alt="Logo" height="150px" width="250px" id='imageLogo' /> */}
+      <MDBContainer>
+        <MDBRow style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <MDBCol md="6">
+            <form >
+              <p className="h5 text-center mb-4 title">Login</p>
+              <div className="grey-text">
+                <MDBInput
+                  labelClass='inputs'
+                  iconClass='inputs'
+                  background='inputs'
+                  label="Digite seu email"
+                  icon="envelope"
+                  group
+                  type="email"
+                  validate
+                  error="wrong"
+                  success="right"
+                />
+                <MDBInput
+                  iconClass='inputs'
+                  background='inputs'
+                  label="Digite sua senha"
+                  icon="lock"
+                  group
+                  type="password"
+                  validate
+                />
+                <div className='selectSector'>
 
-export default class Login extends Component {
-  render() {
-    return (
-      <div>
-        <Form>
-          <FormGroup>
-            <div className="form__group field">
-              <label for="user" className="form__label">
-                Usuário
-                    </label>
-              <input
-                type="input"
-                className="form__field"
-                placeholder="Usuário"
-                name="user"
-                id="user"
-                required
-              />
+                </div>
 
-            </div>
-          </FormGroup>
-          <FormGroup controlId="formGroupPassword">
-            <div className="form__group field">
-              <label for="user" className="form__label">
-                Senha
-                    </label>
-              <input
-                type="password"
-                className="form__field"
-                placeholder="Senha"
-                name="password"
-                id="password"
-                required
-              />
+              </div>
+              <div className="text-center">
+                <Link to="/home">Login</Link>
+              </div>
+            </form>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </div>
+  );
+};
 
-            </div>
-          </FormGroup>
-          <Link to="/home">
-            <Button variant="dark" className="buttons">
-              Login
-                  </Button>
-          </Link>
-
-        </Form>
-
-      </div>
-    );
-  }
-}
+export default Login;
