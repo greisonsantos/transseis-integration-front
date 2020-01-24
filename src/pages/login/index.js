@@ -12,7 +12,7 @@ const Login = () => {
       <MDBContainer>
         <MDBRow style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
           <MDBCol md="6" style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.8)', borderRadius: 30, padding: 20, paddingRight: 30
+            backgroundColor: '#5222B9', borderRadius: 30, padding: 20, paddingRight: 30
           }}>
             <form >
               <p style={{ color: '#fff' }} className="h5 text-center mb-4 title">Login</p>
@@ -43,9 +43,9 @@ const Login = () => {
                 </div>
 
               </div>
-              <div style={{ marginLeft: 150, borderRadius: 20, backgroundColor: '#000fff', width: 200 }} className="text-center">
+              <div style={{ marginLeft: 130, borderRadius: 20, backgroundColor: '#fff', width: 250 }} className="text-center">
                 <Link to="/home">
-                  <h2 style={{ color: '#fff' }} >Login</h2>
+                  <h2 style={{ color: '#000' }} >Login</h2>
                 </Link>
               </div>
 
