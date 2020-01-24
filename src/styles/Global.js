@@ -15,7 +15,7 @@ body {
   text-rendering: optmizeLegibility !important;
   -webkit-font-smooting: antialiased !important;
   font-family: sans-serif;
-  background: #DDD
+  background: #FFF
 }
 `;
 
