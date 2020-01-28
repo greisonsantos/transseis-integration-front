@@ -10,12 +10,21 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.css";
-
+import api from '../../services/api'
 
 const Home = () => {
 
-  useEffect(() => {
 
+
+  useEffect(async () => {
+    const response = await api.get('/trucks')
+
+    console.log(response.data)
+    if (response.status == 200) {
+
+      setDataTable({ ...dataTable, rows: response.data })
+    } else {
+    }
   }, [])
 
 
@@ -23,7 +32,7 @@ const Home = () => {
     columns: [
       {
         label: "ID do veículo",
-        field: "IdVeiculo",
+        field: "id_veiculo",
         sort: "asc",
         width: 150
       },
