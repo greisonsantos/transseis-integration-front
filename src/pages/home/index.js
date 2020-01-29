@@ -60,7 +60,7 @@ const Home = (props) => {
           console.log(truck.data_posicao);
         return {
           ...truck,
-          data_posicao: format(new Date(truck.data_posicao),'dd/MM/yyyy HH:mm:ss'),
+          // data_posicao: getDateNow(truck.data_posicao),
           status: truck.status === true ? <div style={{ color: '#3CB310' }}>Enviando dados</div> : <div style={{ color: '#8B0000' }}>Não está enviando dados</div>,
           ignicao: truck.ignicao === true ? <div style={{ color: '#3CB310' }}>Ligada</div> : <div style={{ color: '#8B0000' }}>Desligada</div>,
           action: (
