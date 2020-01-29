@@ -80,14 +80,20 @@ const Home = () => {
         width: 270
       },
       {
-        label: "Latitude ",
-        field: "latitude",
+        label: "Rua ",
+        field: "Street",
         sort: "asc",
         width: 100
       },
       {
-        label: "Longitude",
-        field: "longitude",
+        label: "Cidade",
+        field: "city",
+        sort: "asc",
+        width: 100
+      },
+      {
+        label: "Ingnição",
+        field: "ignition",
         sort: "asc",
         width: 150
       },
