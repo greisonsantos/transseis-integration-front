@@ -11,18 +11,55 @@ import "mdbreact/dist/css/mdb.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.css";
 import api from '../../services/api'
+import swal from 'sweetalert';
+
 
 const Home = () => {
 
+  const UpdateTruck = async (truckId, status) => {
+
+
+    const response = await api.put(`/trucks/${truckId}`, {
+      status: !status
+    });
+
+    // console.log(response)
+    if (response.data.msg = 'created') {
+      swal("Sucesso!", "Status de Rastrio alterado com sucesso", "success")
+        .then((value) => {
+          document.location.reload(true);
+        });
+    } else {
+      swal("Atenção", "Erro ao atualizar o status! Tente novamente.", "error");
+
+    }
+
+  }
 
 
   useEffect(async () => {
     const response = await api.get('/trucks')
-
-    console.log(response.data)
     if (response.status == 200) {
 
-      setDataTable({ ...dataTable, rows: response.data })
+      const trucks = response.data.map(truck => {
+
+        return {
+          ...truck,
+          status: truck.status === true ? <div style={{ color: '#3CB310' }}>Rastreado</div> : <div style={{ color: '#8B0000' }}>Não Rastreado</div>,
+          action: (
+            <button onClick={() => {
+              UpdateTruck(truck.id_veiculo, truck.status);
+            }}
+              style={{ backgroundColor: "#000080", color: '#FFF', padding: 7, borderRadius: 8 }}
+              type="button" className="details">
+              Alterar Status
+          </button>
+          ),
+        }
+      });
+      console.log(trucks)
+
+      setDataTable({ ...dataTable, rows: trucks })
     } else {
     }
   }, [])
@@ -87,14 +124,11 @@ const Home = () => {
           <MDBCardBody>
             <h6 className="card-title">Lista de caminhões</h6>
             <MDBDataTable
-              hover
               striped
               bordered
               small
-              searchingLabel="Pesquisa"
               data={dataTable}
-              exportToCSV
-              displayEntries
+              searchingLabel="Pesquisar"
 
             />
           </MDBCardBody>
