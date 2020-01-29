@@ -14,7 +14,7 @@ import api from '../../services/api'
 import swal from 'sweetalert';
 
 
-const Home = () => {
+const Home = (props) => {
 
   const UpdateTruck = async (truckId, status) => {
 
@@ -36,6 +36,11 @@ const Home = () => {
 
   }
 
+  const SiginOut = () => {
+    localStorage.removeItem('@token');
+    // props.history.push('/')
+    document.location.replace('/')
+  }
 
   useEffect(async () => {
     const response = await api.get('/trucks')
@@ -120,8 +125,10 @@ const Home = () => {
         <Toolbar variant="dense">
           <IconButton edge="start" color="inherit" aria-label="menu">
             Dashboard
+        </IconButton >
+          <IconButton edge="center" color="inherit" aria-label="menu" onClick={SiginOut}>
+            Sair
         </IconButton>
-
         </Toolbar>
       </AppBar>
 
