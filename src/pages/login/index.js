@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput } from 'mdbreact';
 import { Button } from 'react-bootstrap'
 import './style.css';
-import { Link } from "react-router-dom";
 import api from '../../services/api';
 
 const Login = (props) => {

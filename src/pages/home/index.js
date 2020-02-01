@@ -12,8 +12,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./styles.css";
 import api from '../../services/api'
 import swal from 'sweetalert';
-import {format} from 'date-fns';
-
+import { format, parseISO } from 'date-fns'
 const Home = (props) => {
 
   const UpdateTruck = async (truckId, status) => {
@@ -41,44 +40,51 @@ const Home = (props) => {
     // props.history.push('/')
     document.location.replace('/')
   }
-  function getDateNow(date) {
-    let today = new Date(date);
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    let yyyy = today.getFullYear();
-    let min = String(today.getMinutes()).padStart(2, '0');;
-    let hrs = String(today.getHours()).padStart(2, '0');;
+  // function getDateNow(date) {
+  //   let today = new Date(date);
+  //   let dd = String(today.getDate()).padStart(2, '0');
+  //   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  //   let yyyy = today.getFullYear();
+  //   let min = String(today.getMinutes()).padStart(2, '0');;
+  //   let hrs = String(today.getHours()).padStart(2, '0');;
 
-    today = dd + '/' + mm + '/' + yyyy + ' ' + hrs + ':' + min;
-    return today;
-}
-  useEffect(async () => {
-    const response = await api.get('/trucks')
-    if (response.status == 200) {
+  //   today = dd + '/' + mm + '/' + yyyy + ' ' + hrs + ':' + min;
+  //   return today;
+  // }
+  useEffect(() => {
 
-      const trucks = response.data.map(truck => {
+    async function loadTrucks() {
+      const response = await api.get('/trucks')
+      if (response.status == 200) {
+
+        const trucks = response.data.map(truck => {
           console.log(truck.data_posicao);
-        return {
-          ...truck,
-          // data_posicao: getDateNow(truck.data_posicao),
-          status: truck.status === true ? <div style={{ color: '#3CB310' }}>Enviando dados</div> : <div style={{ color: '#8B0000' }}>Não está enviando dados</div>,
-          ignicao: truck.ignicao === true ? <div style={{ color: '#3CB310' }}>Ligada</div> : <div style={{ color: '#8B0000' }}>Desligada</div>,
-          action: (
-            <button onClick={() => {
-              UpdateTruck(truck.id_veiculo, truck.status);
-            }}
-              style={{ backgroundColor: "#000080", color: '#FFF', padding: 7, borderRadius: 8 }}
-              type="button" className="details">
-              Alterar Status
-          </button>
-          ),
-        }
-      });
-      console.log(trucks)
 
-      setDataTable({ ...dataTable, rows: trucks })
-    } else {
+          return {
+            ...truck,
+            // data_posicao: format(
+            //   parseISO(truck.data_posicao),
+            //   "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
+            // ),
+            status: truck.status === true ? <div style={{ color: '#3CB310' }}>Enviando dados</div> : <div style={{ color: '#8B0000' }}>Não está enviando dados</div>,
+            ignicao: truck.ignicao === true ? <div style={{ color: '#3CB310' }}>Ligada</div> : <div style={{ color: '#8B0000' }}>Desligada</div>,
+            action: (
+              <button onClick={() => {
+                UpdateTruck(truck.id_veiculo, truck.status);
+              }}
+                style={{ backgroundColor: "#000080", color: '#FFF', padding: 7, borderRadius: 8 }}
+                type="button" className="details">
+                Alterar Status
+          </button>
+            ),
+          }
+        });
+
+        setDataTable({ ...dataTable, rows: trucks })
+      } else {
+      }
     }
+    loadTrucks();
   }, [])
 
 
@@ -138,7 +144,7 @@ const Home = (props) => {
   })
 
   return (
-    <page id="main-page">
+    <div id="main-page">
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton edge="start" color="inherit" aria-label="menu">
@@ -159,13 +165,12 @@ const Home = (props) => {
               bordered
               small
               data={dataTable}
-              searchingLabel="Pesquisar"
 
             />
           </MDBCardBody>
         </MDBCard>
       </div>
-    </page>
+    </div>
   )
 };
 
