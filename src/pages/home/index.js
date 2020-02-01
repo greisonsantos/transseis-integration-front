@@ -23,7 +23,7 @@ const Home = (props) => {
     });
 
     // console.log(response)
-    if (response.data.msg = 'created') {
+    if (response.data.msg === 'created') {
       swal("Sucesso!", "Status de Rastreio alterado com sucesso", "success")
         .then((value) => {
           document.location.reload(true);
@@ -44,7 +44,7 @@ const Home = (props) => {
 
     async function loadTrucks() {
       const response = await api.get('/trucks')
-      if (response.status == 200) {
+      if (response.status === 200) {
 
         const trucks = response.data.map(truck => {
           return {
@@ -66,9 +66,8 @@ const Home = (props) => {
           }
         });
 
-        setDataTable({ ...dataTable, rows: trucks })
-      } else {
-      }
+        setDataTable(dataTable=>({ ...dataTable, rows: trucks }))
+      } 
     }
     loadTrucks();
   }, [])
