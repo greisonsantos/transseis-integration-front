@@ -18,9 +18,9 @@ const Login = (props) => {
       password: password
     })
 
-    console.log(response.data)
-    if (response.status == 200) {
-      props.history.push('/home')
+    if (response.status === 200) {
+      // props.history.push('/home')
+      window.location.replace('/home')
       localStorage.setItem('@TOKEN', response.data.token)
     } else {
       setError(true)

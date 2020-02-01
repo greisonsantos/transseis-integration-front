@@ -36,9 +36,9 @@ const Home = (props) => {
   }
 
   const SiginOut = () => {
-    localStorage.removeItem('@token');
-    // props.history.push('/')
-    document.location.replace('/')
+    localStorage.removeItem('@TOKEN');
+    props.history.push('/')
+    // document.location.replace('/')
   }
   // function getDateNow(date) {
   //   let today = new Date(date);
@@ -58,16 +58,14 @@ const Home = (props) => {
       if (response.status == 200) {
 
         const trucks = response.data.map(truck => {
-          console.log(truck.data_posicao);
-
           return {
             ...truck,
             // data_posicao: format(
             //   parseISO(truck.data_posicao),
             //   "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
             // ),
-            status: truck.status === true ? <div style={{ color: '#3CB310' }}>Enviando dados</div> : <div style={{ color: '#8B0000' }}>Não está enviando dados</div>,
-            ignicao: truck.ignicao === true ? <div style={{ color: '#3CB310' }}>Ligada</div> : <div style={{ color: '#8B0000' }}>Desligada</div>,
+            status: truck.status === true ? <div style={{ fontSize: 18, color: '#3CB310' }}>Enviando dados</div> : <div style={{ color: '#8B0000' }}>Não está enviando dados</div>,
+            ignicao: truck.ignicao === true ? <div style={{ fontSize: 15, color: '#3CB310' }}>Ligada</div> : <div style={{ color: '#8B0000' }}>Desligada</div>,
             action: (
               <button onClick={() => {
                 UpdateTruck(truck.id_veiculo, truck.status);
@@ -150,9 +148,11 @@ const Home = (props) => {
           <IconButton edge="start" color="inherit" aria-label="menu">
             Dashboard
         </IconButton >
-          <IconButton edge="center" color="inherit" aria-label="menu" onClick={SiginOut}>
-            Sair
+          <div style={{ display: 'flex', flex: '1', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', paddingRight: 20 }}>
+            <IconButton edge="center" color="inherit" aria-label="menu" onClick={SiginOut}>
+              Sair
         </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
 
