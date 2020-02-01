@@ -38,19 +38,8 @@ const Home = (props) => {
   const SiginOut = () => {
     localStorage.removeItem('@TOKEN');
     props.history.push('/')
-    // document.location.replace('/')
   }
-  // function getDateNow(date) {
-  //   let today = new Date(date);
-  //   let dd = String(today.getDate()).padStart(2, '0');
-  //   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  //   let yyyy = today.getFullYear();
-  //   let min = String(today.getMinutes()).padStart(2, '0');;
-  //   let hrs = String(today.getHours()).padStart(2, '0');;
-
-  //   today = dd + '/' + mm + '/' + yyyy + ' ' + hrs + ':' + min;
-  //   return today;
-  // }
+ 
   useEffect(() => {
 
     async function loadTrucks() {
