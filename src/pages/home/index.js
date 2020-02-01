@@ -12,7 +12,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./styles.css";
 import api from '../../services/api'
 import swal from 'sweetalert';
-import { format, parseISO } from 'date-fns'
+import { format,addHours } from 'date-fns'
 const Home = (props) => {
 
   const UpdateTruck = async (truckId, status) => {
@@ -60,10 +60,9 @@ const Home = (props) => {
         const trucks = response.data.map(truck => {
           return {
             ...truck,
-            // data_posicao: format(
-            //   parseISO(truck.data_posicao),
-            //   "'Dia' dd 'de' MMMM', às ' HH:mm'h'"
-            // ),
+            data_posicao: format(
+              addHours(new Date(truck.data_posicao),3),
+              "dd/MM/yyyy HH:mm"),
             status: truck.status === true ? <div style={{ fontSize: 18, color: '#3CB310' }}>Enviando dados</div> : <div style={{ color: '#8B0000' }}>Não está enviando dados</div>,
             ignicao: truck.ignicao === true ? <div style={{ fontSize: 15, color: '#3CB310' }}>Ligada</div> : <div style={{ color: '#8B0000' }}>Desligada</div>,
             action: (
@@ -91,49 +90,49 @@ const Home = (props) => {
       {
         label: "ID do veículo",
         field: "id_veiculo",
-        sort: "asc",
+        sort: 'asc',
         width: 150
       },
       {
         label: "Placa",
         field: "placa",
-        sort: "asc",
+        sort: 'asc',
         width: 270
       },
       {
         label: "Rua ",
         field: "rua",
-        sort: "asc",
+        sort: 'asc',
         width: 100
       },
       {
         label: "Cidade",
         field: "cidade",
-        sort: "asc",
+        sort: 'asc',
         width: 100
       },
       {
         label: "Data posição",
         field: "data_posicao",
-        sort: "asc",
+        sort: 'asc',
         width: 100
       },
       {
         label: "Ingnição",
         field: "ignicao",
-        sort: "asc",
+        sort: 'asc',
         width: 150
       },
       {
         label: "STATUS",
         field: "status",
-        sort: "asc",
+        sort: 'asc',
         width: 100
       },
       {
         label: "Acão",
         field: "action",
-        sort: "asc",
+        sort: 'asc',
         width: 100
       },
 
@@ -161,11 +160,15 @@ const Home = (props) => {
           <MDBCardBody>
             <h6 className="card-title">Lista de caminhões</h6>
             <MDBDataTable
+            displayEntries={true}
+            entriesLabel={'Escolha o numero de linhas'}
+            searchLabel={'Pesquisar'}
+            paginationLabel={['Anterior','Proximo']}
+            infoLabel={['Mostrando','à','de','registros']}
               striped
               bordered
               small
               data={dataTable}
-
             />
           </MDBCardBody>
         </MDBCard>
