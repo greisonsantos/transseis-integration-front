@@ -44,18 +44,33 @@ const Home = (props) => {
 
   const [show, setShow] = useState(false);
   const [IdShipment, setIdShipment] = useState('')
+  const [truckId, settruckId] = useState(' ')
   const handleClose = () => setShow(false);
 
   const ModalIdShipment = async (truck_id, value) => {
 
     setShow(true)
+    settruckId(truck_id)
     setIdShipment(value)
-    // const response=api.put('/')
   }
 
   const saveIdShipment = async () => {
 
-    // const response
+
+    const response = await api.put(`/trucks/${truckId}`, {
+      id_shipment: IdShipment
+    });
+
+    if (response.data.msg === 'created') {
+      swal("Sucesso!", "IdShipment inserido com sucesso", "success")
+        .then((value) => {
+          document.location.reload(true);
+        });
+    } else {
+      swal("Atenção", "Erro ao inserir o IdShipment! Tente novamente.", "error");
+
+    }
+
 
   }
 
@@ -83,11 +98,11 @@ const Home = (props) => {
           </button>
             ),
             IdShipment: (
-              <button onDoubleClick={() => ModalIdShipment(truck.id, truck.id)}
+              <button onClick={() => ModalIdShipment(truck.id_veiculo, truck.id_shipment, truck.status)}
                 style={{ width: 90, backgroundColor: "#000080", color: '#FFF', padding: 7, borderRadius: 8 }}
                 className="details">
 
-                64654646
+                {truck.id_shipment}
               </button>
 
             )
@@ -213,7 +228,7 @@ const Home = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={saveIdShipment}>
             Salvar
           </Button>
         </Modal.Footer>
