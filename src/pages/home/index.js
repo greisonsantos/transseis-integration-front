@@ -226,7 +226,7 @@ const Home = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+           Cancelar
           </Button>
           <Button variant="primary" onClick={saveIdShipment}>
             Salvar
