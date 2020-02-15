@@ -15,6 +15,6 @@ app.get("*", (req, res) => {
     res.sendFile('index.html', { root });
 })
 
-const port = 21120
+const port = 21217
 app.listen(port, () => console.log(`Servidor subiu com sucesso em http://localhost:${port}`))
 
